@@ -1,0 +1,19 @@
+# editor defaults
+.sublime/*
+.vs/*
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+#dependencies
+/vendor
+
+# lock files
+composer.lock
+
+# system files
+.DS_Store
+Thumbs.db
