@@ -28,4 +28,39 @@ class RouteCollector extends FRRouteCollector
             }
         }
     }
+
+    public function get(string $route, string $handler, array $options = []): void
+    {
+        $this->addRoute('GET', $route, $handler, $options);
+    }
+
+    public function post(string $route, string $handler, array $options = []): void
+    {
+        $this->addRoute('POST', $route, $handler, $options);
+    }
+
+    public function put(string $route, string $handler, array $options = []): void
+    {
+        $this->addRoute('PUT', $route, $handler, $options);
+    }
+
+    public function delete(string $route, string $handler, array $options = []): void
+    {
+        $this->addRoute('DELETE', $route, $handler, $options);
+    }
+
+    public function patch(string $route, string $handler, array $options = []): void
+    {
+        $this->addRoute('PATCH', $route, $handler, $options);
+    }
+
+    public function head(string $route, string $handler, array $options = []): void
+    {
+        $this->addRoute('HEAD', $route, $handler, $options);
+    }
+
+    public function getData(): array
+    {
+        return $this->dataGenerator->getData();
+    }
 }
