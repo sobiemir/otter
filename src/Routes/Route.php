@@ -15,13 +15,13 @@ class Route extends FRRoute
     /** @var array */
     public $variables;
 
-    /** @var mixed */
+    /** @var string */
     public $handler;
 
     /** @var array */
     public $options;
 
-    public function __construct(string $handler, array $options, string $httpMethod, string $regex, array $variables)
+    public function __construct(string $handler, array $options, string $httpMethod = null, string $regex = null, array $variables = null)
     {
         $this->httpMethod = $httpMethod;
         $this->handler = $handler;

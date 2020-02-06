@@ -18,7 +18,7 @@ class RouteCollector extends FRRouteCollector
         $this->currentGroupPrefix = '';
     }
 
-    public function addRoute($httpMethod, $route, $handler, $options)
+    public function addRoute(string $httpMethod, string $route, string $handler, array $options): void
     {
         $route = $this->currentGroupPrefix . $route;
         $routeDatas = $this->routeParser->parse($route);
