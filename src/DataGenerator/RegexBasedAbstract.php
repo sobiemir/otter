@@ -4,10 +4,9 @@ namespace Otter\DataGenerator;
 
 use FastRoute\BadRouteException;
 use FastRoute\DataGenerator\RegexBasedAbstract as FRRegexBasedAbstract;
-use FastRoute\Route;
-use Otter\DataGenerator;
+use Otter\Routes\Route;
 
-abstract class RegexBasedAbstract extends FRRegexBasedAbstract implements DataGenerator
+abstract class RegexBasedAbstract extends FRRegexBasedAbstract implements DataGeneratorInterface
 {
     public function addRoute($httpMethod, $routeData, $handler, $options)
     {
@@ -49,11 +48,11 @@ abstract class RegexBasedAbstract extends FRRegexBasedAbstract implements DataGe
         ];
     }
 
-    private function addVariableRoute($httpMethod, $routeData, $handler, $options)
+    private function addVariableRoute(string $httpMethod, array $routeData, string $handler, array $options): void
     {
         list($regex, $variables) = parent->buildRegexForRoute($routeData);
 
-        if (isset($this->methodToRegexToRoutesMap[$httpMethod][$regex])) {
+        if (isset(parent->methodToRegexToRoutesMap[$httpMethod][$regex])) {
             throw new BadRouteException(sprintf(
                 'Cannot register two routes matching "%s" for method "%s"',
                 $regex,
@@ -61,14 +60,12 @@ abstract class RegexBasedAbstract extends FRRegexBasedAbstract implements DataGe
             ));
         }
 
-        $this->methodToRegexToRoutesMap[$httpMethod][$regex] = [
-            new Route(
-                $httpMethod,
-                $handler,
-                $regex,
-                $variables
-            ),
-            $options
-        ];
+        parent->methodToRegexToRoutesMap[$httpMethod][$regex] = new Route(
+            $handler,
+            $options,
+            $httpMethod,
+            $regex,
+            $variables
+        );
     }
 }

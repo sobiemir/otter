@@ -1,16 +1,17 @@
 <?php
 
-namespace Otter;
+namespace Otter\Routes;
 
 use FastRoute\RouteCollector as FRRouteCollector;
 use FastRoute\RouteParser;
+use Otter\DataGenerator\DataGeneratorInterface;
 
 class RouteCollector extends FRRouteCollector
 {
-    /** @var DataGenerator */
+    /** @var DataGeneratorInterface */
     protected $dataGenerator;
 
-    public function __construct(RouteParser $routeParser, DataGenerator $dataGenerator)
+    public function __construct(RouteParser $routeParser, DataGeneratorInterface $dataGenerator)
     {
         $this->routeParser = $routeParser;
         $this->dataGenerator = $dataGenerator;
